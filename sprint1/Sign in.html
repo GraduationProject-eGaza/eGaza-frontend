@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .signin-container {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            min-width: 320px;
+            padding: 28px 32px;
+            text-align: center;
+            box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 60px 32px 28px;
+
+        }
+
+        .signin-title {
+            font-size: 26px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .signin-subtitle {
+            font-size: x-small;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: normal;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            min-height: 35px;
+            height: 35px;
+            padding: 0 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.2s ease;
+            box-sizing: border-box;
+            line-height: 1.4;
+        }
+
+        .form-input[type="text"] {
+            text-align: left;
+        }
+
+        .form-input:focus {
+            outline: none;
+             border-color: #002D62;
+    box-shadow: 0 0 5px #004A99;
+        }
+
+        .form-input::placeholder {
+            color: #ccc;
+        }
+
+        
+        .continue-button {
+            width: 100%;
+            min-height: 35px;
+            height: 35px;
+            background: #002D62;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 12px;
+            box-sizing: border-box;
+            line-height: 1.4;
+        }
+
+        .continue-button:hover {
+            background: #004A99;
+            color: #ABADAC;
+        }
+
+        .continue-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #d73a49;
+            font-size: 12px;
+            margin-top: 4px;
+            text-align: left;
+            display: none;
+        }
+
+        .form-input.error {
+            border-color: #d73a49;
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .signin-container {
+                width: 95%;
+                padding: 20px 24px;
+                margin: 16px auto;
+                min-width: 280px;
+            }
+            
+            .signin-title {
+                font-size: 28px;
+            }
+
+            .form-input,
+            .continue-button {
+                min-height: 44px;
+                height: 44px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .signin-container {
+                width: 95%;
+                padding: 16px 20px;
+                margin: 12px auto;
+                min-width: 260px;
+            }
+
+            .form-input,
+            .continue-button {
+                min-height: 42px;
+                height: 42px;
+            }
+        }
+        .signin-title {
+    font-size: 28px;
+    font-weight: bolder;
+    color: #333;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.signin-container {
+  position: relative;
+  /* بقية الخصائص كما كانت */
+}
+.logo-half-out {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+    </style>
+</head>
+<body>
+    <div class="signin-container">
+        <img src="logo gaza.png" alt="Logo" class="logo-half-out">
+
+        <h1 class="signin-title">Sign in</h1>
+        <p class="signin-subtitle">Welcome back! Please sign in to continue</p>
+        
+        <form id="signinForm" style="padding: 5px 25px;">
+            <div class="form-group">
+                <label class="form-label" for="nationalId">National ID</label>
+                <input 
+                    type="text" 
+                    id="nationalId" 
+                    name="nationalId"
+                    class="form-input" 
+                    placeholder=""
+                    required
+                    autocomplete="username"
+                    maxlength="9"
+                    pattern="[0-9]{9}"
+                    inputmode="numeric"
+                >
+                <div class="error-message" id="errorMessage">National ID must be exactly 9 digits</div>
+            </div>
+            
+            <button
+  type="button"
+  id="continueBtn"
+  class="continue-button"
+  onclick="goNextPage()"
+  disabled
+>
+  Continue
+</button>
+
+        </form>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_CONFIG = {
+            baseURL: 'https://api.yourproject.com', // Replace with your actual API endpoint
+            timeout: 10000,
+            endpoints: {
+                signin: '/auth/signin',
+                verify: '/auth/verify'
+            }
+        };
+
+        // API Service
+        class AuthAPI {
+            constructor(config) {
+                this.config = config;
+            }
+
+            async makeRequest(endpoint, options = {}) {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
+
+                const url = `${this.config.baseURL}${endpoint}`;
+                const defaultOptions = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    signal: controller.signal
+                };
+
+                try {
+                    const response = await fetch(url, { ...defaultOptions, ...options });
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    clearTimeout(timeoutId);
+                    
+                    if (error.name === 'AbortError') {
+                        throw new Error('Request timeout. Please try again.');
+                    }
+                    
+                    throw error;
+                }
+            }
+
+            async signin(nationalId) {
+                // For demo purposes, simulate API call
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Mock validation
+                        if (this.validateNationalId(nationalId)) {
+                            resolve({
+                                success: true,
+                                user: {
+                                    id: 'user_' + Date.now(),
+                                    nationalId: nationalId,
+                                    name: 'Demo User'
+                                },
+                                token: 'mock_jwt_token_' + Date.now(),
+                                expiresIn: 3600
+                            });
+                        } else {
+                            reject(new Error('Invalid National ID format'));
+                        }
+                    }, 1500);
+                });
+
+                // Uncomment below for real API integration
+                /*
+                return this.makeRequest(this.config.endpoints.signin, {
+                    method: 'POST',
+                    body: JSON.stringify({ nationalId })
+                });
+                */
+            }
+
+            validateNationalId(nationalId) {
+                // National ID must be exactly 9 digits
+                const cleaned = nationalId.replace(/\s+/g, '');
+                return cleaned.length === 9 && /^[0-9]{9}$/.test(cleaned);
+            }
+        }
+
+        // Form Handler
+        class SignInForm {
+            constructor() {
+                this.api = new AuthAPI(API_CONFIG);
+                this.form = document.getElementById('signinForm');
+                this.nationalIdInput = document.getElementById('nationalId');
+                this.continueBtn = document.getElementById('continueBtn');
+                this.buttonText = document.getElementById('buttonText');
+                this.errorMessage = document.getElementById('errorMessage');
+                
+                this.isSubmitting = false;
+                
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+                this.nationalIdInput.addEventListener('input', this.handleInput.bind(this));
+                this.nationalIdInput.addEventListener('keypress', this.handleKeyPress.bind(this));
+            }
+
+           handleInput(e) {
+    // فقط أرقام
+    let value = e.target.value.replace(/[^0-9]/g, '');
+    
+    // حد أقصى 9 أرقام
+    if (value.length > 9) {
+        value = value.substring(0, 9);
+    }
+    
+    e.target.value = value;
+    this.clearError();
+
+    // ✅ تفعيل الزر فقط إذا 9 أرقام
+    if (value.length === 9) {
+        this.continueBtn.disabled = false;
+        this.clearError();
+    } else {
+        this.continueBtn.disabled = true;
+        if (value.length > 0) {
+            this.showError('National ID must be exactly 9 digits');
+        }
+    }
+}
+
+            handleKeyPress(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.form.dispatchEvent(new Event('submit'));
+                }
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                if (this.isSubmitting) return;
+                
+                const nationalId = this.nationalIdInput.value.trim();
+                
+                // Validation
+                if (!nationalId) {
+                    this.showError('National ID is required');
+                    this.nationalIdInput.focus();
+                    return;
+                }
+
+                if (!this.api.validateNationalId(nationalId)) {
+                    this.showError('National ID must be exactly 9 digits');
+                    this.nationalIdInput.focus();
+                    return;
+                }
+
+                await this.performSignIn(nationalId);
+            }
+
+            async performSignIn(nationalId) {
+                this.setLoadingState(true);
+                this.clearError();
+
+                try {
+                    const result = await this.api.signin(nationalId);
+                    
+                    if (result.success) {
+                        this.handleSignInSuccess(result);
+                    } else {
+                        this.showError('Sign in failed. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Sign in error:', error);
+                    this.showError(error.message || 'An error occurred. Please try again.');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+
+            handleSignInSuccess(result) {
+                // Store auth data (in real app, use secure storage)
+                this.storeAuthData(result);
+                
+                // Update UI to show success
+                this.buttonText.textContent = 'Success!';
+                this.continueBtn.style.background = '#28a745';
+                
+                // Redirect after short delay
+                setTimeout(() => {
+                    this.redirectToApplication();
+                }, 1000);
+            }
+
+            storeAuthData(authData) {
+                // In a real application, store securely
+                // For demo, we'll use memory storage
+                window.appAuth = {
+                    user: authData.user,
+                    token: authData.token,
+                    expiresIn: authData.expiresIn,
+                    timestamp: Date.now()
+                };
+                
+                console.log('Auth data stored:', window.appAuth);
+            }
+
+            redirectToApplication() {
+                // Replace with your actual dashboard/main app URL
+                const redirectUrl = '/dashboard';
+                console.log('Redirecting to:', redirectUrl);
+                
+                // For demo purposes, show alert
+                alert(`Sign in successful! Redirecting to ${redirectUrl}`);
+                
+                // Uncomment for real redirect
+                // window.location.href = redirectUrl;
+            }
+
+            setLoadingState(isLoading) {
+                this.isSubmitting = isLoading;
+                this.continueBtn.disabled = isLoading;
+                
+                if (isLoading) {
+                    this.buttonText.textContent = 'Signing in...';
+                    this.continueBtn.classList.add('loading');
+                } else {
+                    this.buttonText.textContent = 'Continue';
+                    this.continueBtn.classList.remove('loading');
+                }
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.nationalIdInput.classList.add('error');
+            }
+
+            clearError() {
+                this.errorMessage.style.display = 'none';
+                this.nationalIdInput.classList.remove('error');
+            }
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            new SignInForm();
+        });
+
+        // Additional utility functions
+        const Utils = {
+            // Format National ID for display
+            formatNationalId(value) {
+                return value.replace(/\s+/g, '').toUpperCase();
+            },
+
+            // Check if user is already authenticated
+            isAuthenticated() {
+                const authData = window.appAuth;
+                if (!authData) return false;
+                
+                const now = Date.now();
+                const expiresAt = authData.timestamp + (authData.expiresIn * 1000);
+                
+                return now < expiresAt;
+            },
+
+            // Clear authentication data
+            clearAuth() {
+                delete window.appAuth;
+            }
+        };
+
+        // Auto-redirect if already authenticated
+        document.addEventListener('DOMContentLoaded', () => {
+            if (Utils.isAuthenticated()) {
+                console.log('User already authenticated, redirecting...');
+                // Uncomment for auto-redirect
+                // window.location.href = '/dashboard';
+            }
+        });
+        function goNextPage() {
+  // مثلاً هنا رابط الصفحة الثانية:
+  window.location.href = "password.html";
+}
+
+    </script>
+</body>
+</html>
