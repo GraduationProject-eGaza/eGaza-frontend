@@ -1,0 +1,1478 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Information</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #ffffff !important;
+    }
+    .py-0{
+      background-color: #ffffff;
+    }
+    .tab-link {
+      padding: 8px 12px;
+      cursor: pointer;
+      color:gray;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .tab-link.active {
+      color: #000;
+      border-bottom: 2px solid #000;
+      font-weight: 600;
+    }
+    .form-section {
+      
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .profile-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .camera-icon {
+      position: absolute;
+      bottom: 0;
+      right: 42%;
+      background: #fff;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    .tabs-container {
+      background-color: #ffffff;
+      padding: 20px 20px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 16px;
+      justify-content: start;
+      border-bottom: 1px solid #ffffff;
+    }
+    .back-link {
+      font-weight: 500;
+      color: #0a1a31;
+      font-size: 13px;
+      margin-bottom: 0;
+      display: inline-block;
+    }
+    .tabs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding-bottom: 10px;
+      padding-top: 50px;
+      margin-left: 10%;
+      margin-right: 28%;
+    }
+    input[readonly] {
+      color:  #899197;
+    }
+    .back-link {
+  font-weight: 500;
+  color: #0b2449;
+  font-size: 13px;
+  margin-bottom: 0;
+  /* إلغاء أي مسافات سابقة قد تعيق الصف */
+  white-space: nowrap;
+}
+.form-label {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+}
+
+.text-muted {
+    font-size: xx-small;
+    --bs-text-opacity: 1;
+    color: var(--bs-secondary-color) !important;
+}
+.form-control {
+    height: 35px;
+}
+
+    .form-select {
+        transition: none;
+        height: 43%;
+    }
+
+    .nav-tabs .nav-link {
+  width: 100%;
+  text-align: center;
+}
+.nav-tabs .nav-item {
+  flex: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: gray;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+}
+ 
+ @media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 650px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+    .profile-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgb(239 227 227 / 13%);
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-left img {
+      width: 24px;
+      height: 24px;
+    }
+    .profile-left img {
+    width: 20px;
+    height: 20px;
+    border-radius: 1pc
+16px
+;
+}
+    .profile-left span {
+      font-weight: 600;
+      font-size: smaller;
+    }
+    .pofile-right input {
+      font-size:smaller;
+
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+    .profile-right button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: smaller;
+      height: 30px;
+    }
+    .confirm-btn {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+    }
+    .cancel-btn {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+    }
+    .visit-btn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .save-btn {
+      display: block;
+      margin: 20px auto 0;
+      background-color: #002b5b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .fw-semibold {
+    font-size: inherit;
+    font-weight: 600 !important;
+}
+   /* tab4*/
+   
+.card-custom {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+
+.card-title {
+  font-weight:300;
+  font-size: xx-small;
+  margin-bottom: 8px;
+}
+
+
+.followers {
+  font-size:x-small;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+
+.btn-primary,
+.btn-outline-primary {
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 6px 0;
+  border-radius: 6px;
+}
+
+
+.btn-primary {
+  background-color: #002855;
+  border: none;
+}
+.btn-outline-primary{
+    border: 1px solid #002855;
+}
+
+
+.search-input {
+  max-width: 400px;
+}
+
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+
+.nav-tabs .nav-link.active {
+  font-weight: bold;
+}
+
+
+.three-dots {
+  
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+}
+
+
+.card-img-top {
+  height: 60px;
+  width: auto;
+  margin-bottom: 10px;
+}
+.profile-right input {
+  font-size: smaller;
+    height: 30px; 
+    width: 100px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+/* tab 5*/
+ .header {
+            background: #0d224d;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .notification-icon:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .profile-section {
+            padding: 16px 20px;
+            background: #f7f7f7;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .back-to-profile {
+            color: #002855;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 0;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .back-to-profile:hover {
+            text-decoration: underline;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            padding: 0 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-tab {
+            padding: 14px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+            color: #8a8a8a;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            color: #002855;
+            border-bottom-color: #002855;
+        }
+
+        .nav-tab:hover {
+            color: #0a3566;
+            background: rgba(66, 103, 178, 0.05);
+        }
+
+        .search-section {
+            padding: 20px;
+            background: white;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            background: #f5f5f5;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            background: white;
+            border-color: #4267B2;
+            box-shadow: 0 0 0 2px rgba(66, 103, 178, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a8a8a;
+            font-size: 14px;
+        }
+
+        .friends-header {
+            padding: 20px;
+            background: white;
+        }
+
+        .friends-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d2129;
+            margin: 0;
+            padding: 10px 50px;
+        }
+
+        .friends-list {
+            background: white;
+            padding: 0 20px 40px;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 50px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .friend-item:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .friend-item:last-child {
+            border-bottom: none;
+        }
+
+        .friend-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .friend-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .friend-name {
+            color: #1d2129;
+            font-size: 11px;
+            font-weight: 600;
+            
+        }
+
+        .friend-status {
+            color: #8a8a8a;
+            font-size: 9px;
+        }
+
+        .friend-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid;
+            transition: all 0.2s;
+            text-transform: none;
+        }
+
+        .btn-message {
+            background: #002855;
+            color: white;
+            border-color: #002855;
+        }
+
+        .btn-message:hover {
+            background: #354b72;
+            border-color: #6d7a94;
+        }
+
+        .btn-unfriend {
+            background: white;
+            color: #4b4f56;
+            border-color: #ccd0d5;
+        }
+
+        .btn-unfriend:hover {
+            background: #f5f6f7;
+            color: #1d2129;
+        }
+
+        .more-options {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background: white;
+            border: 1px solid #ccd0d5;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #4b4f56;
+            transition: all 0.2s;
+        }
+
+        .more-options:hover {
+            background: #f5f6f7;
+            color: #1d2129;
+        }
+
+        .avatar-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .avatar-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .avatar-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .avatar-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+        .avatar-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        .avatar-6 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; }
+        .avatar-7 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #333; }
+        .avatar-8 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333; }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+            
+            .nav-tab {
+                margin-right: 20px;
+                font-size: 14px;
+            }
+            
+            .friend-actions {
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .btn {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+  @media (min-width: 768px) {
+    .col-md-10 {
+        flex: 0 0 auto;
+        width: 99.333333%;
+    }
+}
+.profile{
+  background-color: white;
+}
+
+.section-title {
+    padding: 10px 50px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1px;
+}
+.card-custom {
+    width: 81%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+    height: 94%;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+.form-label {
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: x-small;
+    font-weight: 400;
+    line-height: 15px;
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/*
+.g-4{
+  padding: 0px 0px 0px 67px; !important;
+
+}*/
+.row.g-4 {
+  --bs-gutter-x: 0.5rem; /* قلل المسافة الأفقية بين الأعمدة */
+  --bs-gutter-y: 0.5rem; /* قلل المسافة الرأسية بين الصفوف */
+}
+.input-group-text {
+    display: flex
+;
+    align-items: center;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 15px;
+    color: var(--bs-body-color);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--bs-tertiary-bg);
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+}
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: calc(var(--bs-border-width) * -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 29px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 10px ; 
+}
+
+.tab {
+    cursor: pointer;
+    padding: -1px 10px;
+    font-size: 10px;
+    /* font-weight: unset; */
+    color: gray;
+    border-bottom: 2px solid transparent;
+}
+  </style>
+</head>
+<body>
+  <div class="profile">
+  <!-- Tabs + Back Link Container -->
+  <div class="tabs-header d-flex justify-content-between align-items-center">
+    <a href="sprint2.html" class="back-link">&larr; Back to Profile</a>
+    <div class="tabs d-flex gap-3">
+      <div class="tab active" data-tab="tab1">Personal Information</div>
+      <div class="tab" data-tab="tab2">Password</div>
+      <div class="tab" data-tab="tab3">Connected Profiles</div>
+      <div class="tab" data-tab="tab4">Followed Governments</div>
+      <div class="tab" data-tab="tab5">Friends</div>
+    </div>
+  </div>
+  
+      <div class="tab-content" data-content="tab1">
+                    <!-- محتوى Personal Information ✅ -->
+                    <!-- Form Section -->
+                     <div class="form-section mx-auto mt-3" style="max-width:600px;">
+           
+                <h5 class="mb-4 fw-semibold">My Personal Information</h5>
+
+                <div class="text-center position-relative mb-4">
+                <svg width="60" height="60" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle cx="40" cy="40" r="40" fill="url(#pattern0_3263_3251)"/>
+                    <defs>
+                    <pattern id="pattern0_3263_3251" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_3263_3251" transform="translate(-0.251366) scale(0.00546448)"/>
+                    </pattern>
+                    <image id="image0_3263_3251" width="275" height="183" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,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"/>
+                    </defs>
+                    </svg>
+                    
+                <div class="camera-icon border">
+                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="20" fill="#002D62"/>
+                    <path d="M22.3188 12.9293L23.856 14.5914L23.8657 14.5836L23.8521 14.5953H26.4106C26.7761 14.5954 27.0918 14.7069 27.3589 14.9283L27.4702 15.0299C27.7594 15.3191 27.9047 15.6719 27.9048 16.0895V25.5768C27.9048 25.9945 27.7595 26.3481 27.4702 26.6373C27.1811 26.9263 26.8281 27.0709 26.4106 27.0709H13.5903C13.2248 27.0709 12.9082 26.9603 12.6411 26.7389L12.5298 26.6373C12.2405 26.3481 12.0962 25.9945 12.0962 25.5768V16.0895C12.0962 15.7241 12.2068 15.4082 12.4282 15.1412L12.5298 15.0299C12.8191 14.7406 13.1726 14.5953 13.5903 14.5953H16.1343V14.6022L16.144 14.5914L17.6821 12.9293H22.3188ZM18.2124 14.1578L16.687 15.8209H13.5903C13.532 15.8209 13.4802 15.8345 13.437 15.8629L13.397 15.8961C13.3464 15.9467 13.3209 16.0118 13.3208 16.0895V25.5768C13.3208 25.6351 13.3354 25.6859 13.3638 25.7291L13.397 25.7701C13.4476 25.8207 13.5126 25.8453 13.5903 25.8453H26.4106C26.4689 25.8453 26.5198 25.8317 26.563 25.8033L26.604 25.7701C26.6545 25.7195 26.6792 25.6545 26.6792 25.5768V16.0895C26.6792 16.0313 26.6655 15.9803 26.6372 15.9371L26.604 15.8961C26.5534 15.8455 26.4883 15.821 26.4106 15.8209H23.313L21.7886 14.1578L21.7788 14.1666L21.7925 14.1539H18.2212V14.1481L18.2124 14.1578ZM20.0005 17.4166C20.9533 17.4167 21.7608 17.7474 22.4233 18.4098C23.086 19.0724 23.4175 19.8806 23.4175 20.8336C23.4174 21.7865 23.0859 22.5939 22.4233 23.2565C21.7608 23.919 20.9533 24.2505 20.0005 24.2506C19.0475 24.2506 18.2393 23.9191 17.5767 23.2565C16.9142 22.594 16.5836 21.7864 16.5835 20.8336C16.5835 19.8806 16.914 19.0724 17.5767 18.4098C18.2393 17.7472 19.0475 17.4166 20.0005 17.4166ZM20.0005 18.6412C19.4594 18.6412 18.9932 18.8023 18.603 19.1246L18.4399 19.2731C18.0186 19.6943 17.8081 20.215 17.8081 20.8336C17.8082 21.3747 17.969 21.841 18.2915 22.2311L18.4399 22.3932C18.8611 22.8145 19.3819 23.025 20.0005 23.025C20.5417 23.025 21.0078 22.8642 21.3979 22.5416L21.5601 22.3932C21.9813 21.9721 22.1918 21.4521 22.1919 20.8336C22.1919 20.2925 22.0309 19.8263 21.7085 19.4362L21.5601 19.2731C21.139 18.8519 20.6189 18.6413 20.0005 18.6412Z" fill="white" stroke="white" stroke-width="0.025"/>
+                    </svg>
+                    </div>
+                </div>
+
+                <form>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                    <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Content">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">National ID <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="403512398" readonly disabled>
+                    <small class="form-text text-muted">You cannot edit your national ID</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                    <select class="form-select">
+                        <option>Content</option>
+                    </select>
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Governorate <span class="text-danger">*</span></label>
+                    <select class="form-select">
+                        <option>Content</option>
+                    </select>
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">City <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Content">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Street</label>
+                    <input type="text" class="form-control" placeholder="Content">
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Nearest landmark</label>
+                    <input type="text" class="form-control" placeholder="Content">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" placeholder="Content">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                        <img src="https://flagcdn.com/w40/ps.png" width="20"> (+970)
+                        </span>
+                        <input type="text" class="form-control" placeholder="Content">
+                    </div>
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                </div>
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </form>
+            </div>
+      </div>
+    </div>
+    </div>
+      
+      <div class="tab-content" data-content="tab2" style="display: none;">
+        <!-- محتوى Password -->
+                  
+                   <!-- Form Section -->
+            <div class="form-section mx-auto mt-3" style="max-width: 450px;">
+                <h5 class="mb-4 fw-semibold">My Password</h5>
+                <form>
+                <div class="row g-3">
+                    <div class="col-md-10">
+                    <label class="form-label">Current Password<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control"  placeholder="Content">
+                    <small class="form-text text-muted">Helper Place holder</small>
+                    </div>
+                    <div class="col-md-10">
+                    <label class="form-label">New Password<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Content" >
+                    <small class="form-text text-muted">You cannot edit your national ID</small>
+                    </div>
+                    
+                    <div class="col-md-10">
+                    <label class="form-label">Confirm New Password<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Content">
+                    </div>
+                   
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </form>
+            </div>
+      </div> 
+  </div>
+      
+
+      
+      <div class="tab-content" data-content="tab3" style="display: none ;">
+                    <!-- محتوى Personal Information ✅ -->
+ 
+               <div class="form-section mx-auto mt-3" style="max-width: 600px;">
+    <h5 class="mb-4 fw-semibold">My Connected Profiles</h5>
+
+    <!-- Facebook -->
+    <div class="profile-box">
+      <div class="profile-left">
+        <span>=</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" />
+        <span>Facebook</span>
+      </div>
+      <div class="profile-right">
+        <input type="text" placeholder="Paste the link" />
+        <button class="confirm-btn">Confirm</button>
+        <button class="cancel-btn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="all"> 
+    
+    <div class="profile-box">
+      <div class="profile-left">
+        <span>=</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
+        <span>Instagram</span>
+      </div>
+      <div class="profile-right">
+        <button class="visit-btn" title="Go to profile" style="background-color: #ffffff; border: none;"><svg width="20" height="21" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5293 21.801C5.18271 19.6948 6.19195 17.6822 7.66797 15.9954C9.6288 13.7545 12.4364 12.0622 16.4043 11.4954L16.833 11.4338V7.54028L23.792 14.4993L16.833 21.4592V17.3831H16.333C11.2595 17.3831 7.42546 18.7737 4.5293 21.801ZM18.167 12.5901L16.582 12.8391C13.2751 13.288 11.0801 14.6131 9.37793 16.303L9.88672 17.1331C11.8651 16.4812 13.9816 16.0501 16.333 16.05H18.167V18.2385L21.9053 14.5002L21.5518 14.1467L19.0205 11.6145L18.167 10.761V12.5901Z" fill="#002D62" stroke="#002D62"/>
+          </svg></button>
+      </div>
+    </div>
+  </div>
+
+    <!-- WhatsApp -->
+    <div class="profile-box">
+      <div class="profile-left">
+        <span>=</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+        <span>WhatsApp</span>
+      </div>
+      <div class="profile-right">
+        <button class="visit-btn" title="Go to profile"style="background-color: #ffffff; border: none;"><svg width="20" height="21" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5293 21.801C5.18271 19.6948 6.19195 17.6822 7.66797 15.9954C9.6288 13.7545 12.4364 12.0622 16.4043 11.4954L16.833 11.4338V7.54028L23.792 14.4993L16.833 21.4592V17.3831H16.333C11.2595 17.3831 7.42546 18.7737 4.5293 21.801ZM18.167 12.5901L16.582 12.8391C13.2751 13.288 11.0801 14.6131 9.37793 16.303L9.88672 17.1331C11.8651 16.4812 13.9816 16.0501 16.333 16.05H18.167V18.2385L21.9053 14.5002L21.5518 14.1467L19.0205 11.6145L18.167 10.761V12.5901Z" fill="#002D62" stroke="#002D62"/>
+          </svg></button>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <button class="save-btn">Save</button>
+  </div>
+  <script>
+    async function sendProfileLink(profile, url) {
+  try {
+    const res = await fetch('/api/update-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ profile, url })
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err || res.status);
+    }
+    return await res.json();
+  } catch (e) { throw e; }
+}
+
+// Confirm & Cancel buttons
+document.querySelectorAll('.profile-box').forEach(box => {
+  const profile = box.dataset.profile;
+  const input = box.querySelector('input');
+  const confirmBtn = box.querySelector('.confirm-btn');
+  const cancelBtn = box.querySelector('.cancel-btn');
+  const visitBtn = box.querySelector('.visit-btn');
+
+  confirmBtn?.addEventListener('click', async () => {
+    const url = input.value.trim();
+    if (!url) return alert('الرجاء لصق الرابط أولاً');
+    try {
+      await sendProfileLink(profile, url);
+      alert('تم تحديث الرابط ✓');
+    } catch {
+      alert('لم يتم التحديث، حاول لاحقاً');
+    }
+  });
+
+  cancelBtn?.addEventListener('click', () => {
+    input.value = '';
+  });
+
+  visitBtn?.addEventListener('click', () => {
+    const stored = input?.value.trim();
+    if (stored) window.open(stored, '_blank');
+    else alert('الرابط غير مضمن بعد');
+  });
+});
+
+// زر Save
+document.querySelector('.save-btn').addEventListener('click', async () => {
+  const data = {};
+  document.querySelectorAll('.profile-box').forEach(box => {
+    const p = box.dataset.profile;
+    const i = box.querySelector('input');
+    if (i) data[p] = i.value.trim();
+  });
+
+  try {
+    const res = await fetch('/api/save-profiles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error();
+    alert('تم حفظ جميع الروابط');
+  } catch {
+    alert('حدث خطأ أثناء الحفظ');
+  }
+});
+
+  </script>
+      </div>
+     
+      <div class="tab-content" data-content="tab4" style="display: none;">
+    <!-- Cards Grid --><div class="friends-header">
+            <h2 class="friends-title">Followed Governments</h2>
+        </div>
+    
+
+     
+      <!-- Repeat this card -->
+       <div class="row g-2" style="justify-content: center;">
+      <div class="col-md-2 col-sm-6">
+        <div class="card card-custom position-relative text-center p-3">
+          <span class="three-dots">⋮</span>
+          <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo"/>
+          <div class="card-body">
+            <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+            <p class="followers">Followers<br><strong>1122</strong></p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-primary">Message</button>
+              <button class="btn btn-outline-primary">Unfollow</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      
+      <div class="col-md-2 col-sm-6">
+        <div class="card card-custom position-relative text-center p-3">
+          <span class="three-dots">⋮</span>
+          <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+          <div class="card-body">
+            <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+            <p class="followers">Followers<br><strong>1122</strong></p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-primary">Message</button>
+              <button class="btn btn-outline-primary">Unfollow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <div class="card card-custom position-relative text-center p-3">
+          <span class="three-dots">⋮</span>
+          <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+          <div class="card-body">
+            <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+            <p class="followers">Followers<br><strong>1122</strong></p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-primary">Message</button>
+              <button class="btn btn-outline-primary">Unfollow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <div class="card card-custom position-relative text-center p-3">
+          <span class="three-dots">⋮</span>
+          <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+          <div class="card-body">
+            <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+            <p class="followers">Followers<br><strong>1122</strong></p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-primary">Unfollow</button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Repeat the above div for each card (copy-paste) -->
+
+
+    </div>
+    <div class="row g-2" style="justify-content: center;">
+
+
+        <!-- Repeat this card -->
+        <div class="col-md-2 col-sm-6">
+          <div class="card card-custom position-relative text-center p-3">
+            <span class="three-dots">⋮</span>
+            <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+            <div class="card-body">
+              <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+              <p class="followers">Followers<br><strong>1122</strong></p>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary">Message</button>
+                <button class="btn btn-outline-primary">Unfollow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+          <div class="card card-custom position-relative text-center p-3">
+            <span class="three-dots">⋮</span>
+            <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+            <div class="card-body">
+              <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+              <p class="followers">Followers<br><strong>1122</strong></p>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary">Message</button>
+                <button class="btn btn-outline-primary">Unfollow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+          <div class="card card-custom position-relative text-center p-3">
+            <span class="three-dots">⋮</span>
+            <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+            <div class="card-body">
+              <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+              <p class="followers">Followers<br><strong>1122</strong></p>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary">Message</button>
+                <button class="btn btn-outline-primary">Unfollow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+          <div class="card card-custom position-relative text-center p-3">
+            <span class="three-dots">⋮</span>
+            <img src="unnamed.png" class="card-img-top mx-auto" alt="Logo" style="height: 60px; width: auto;"/>
+            <div class="card-body">
+              <h6 class="card-title">Palestinian Ministry of Social Development</h6>
+              <p class="followers">Followers<br><strong>1122</strong></p>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary">Unfollow</button>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat the above div for each card (copy-paste) -->
+ 
+      </div>
+   </div>
+      </div>
+   
+
+
+  
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- محتوى Followed Governments -->
+      </div>
+      
+      
+  
+
+<div class="tab-content" data-content="tab5" style="display: none;">
+        <!-- محتوى Friends -->
+         
+              
+        <div class="friends-header">
+            <h2 class="friends-title">Friends</h2>
+        </div>
+
+        <div class="friends-list" id="friendsList">
+            <!-- Friends will be populated by JavaScript -->
+        </div>
+    </div>
+</div></div></div>
+    <script>
+        const friends = [
+            { name: "Ahmed Hamed", status: "Your friend since 2y", avatar: "AH", avatarClass: "avatar-1" },
+            { name: "Ahmed Hamed", status: "Your friend since 1y", avatar: "AH", avatarClass: "avatar-2" },
+            { name: "Ahmed Hamed", status: "Your friend since 3y", avatar: "AH", avatarClass: "avatar-3" },
+            { name: "Ahmed Hamed", status: "Your friend since 6m", avatar: "AH", avatarClass: "avatar-4" },
+            { name: "Ahmed Hamed", status: "Your friend since 2y", avatar: "AH", avatarClass: "avatar-5" },
+            { name: "Ahmed Hamed", status: "Your friend since 4m", avatar: "AH", avatarClass: "avatar-6" },
+            { name: "Ahmed Hamed", status: "Your friend since 1y", avatar: "AH", avatarClass: "avatar-7" },
+            { name: "Ahmed Hamed", status: "Your friend since 8m", avatar: "AH", avatarClass: "avatar-8" }
+        ];
+
+        let filteredFriends = [...friends];
+
+        function renderFriends() {
+            const friendsList = document.getElementById('friendsList');
+            
+            friendsList.innerHTML = filteredFriends.map(friend => `
+                <div class="friend-item">
+                    <div class="friend-avatar ${friend.avatarClass}">${friend.avatar}</div>
+                    <div class="friend-info">
+                        <div class="friend-name">${friend.name}</div>
+                        <div class="friend-status">${friend.status}</div>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn btn-message" onclick="sendMessage('${friend.name}')">Message</button>
+                        <button class="btn btn-unfriend" onclick="unfriend('${friend.name}')">Unfriend</button>
+                        <button class="more-options" onclick="showMore('${friend.name}')">⋯</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function searchFriends(query) {
+            filteredFriends = friends.filter(friend => 
+                friend.name.toLowerCase().includes(query.toLowerCase())
+            );
+            renderFriends();
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // You can add different content for different tabs here
+            if (tab === 'friends') {
+                filteredFriends = [...friends];
+                renderFriends();
+            }
+        }
+
+        function sendMessage(friendName) {
+            // Create a chat window simulation
+            const chatWindow = document.createElement('div');
+            chatWindow.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                height: 300px;
+                background: white;
+                border: 1px solid #dadde1;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+            `;
+            
+            chatWindow.innerHTML = `
+                <div style="padding: 16px; border-bottom: 1px solid #dadde1; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; color: #1c1e21;">Chat with ${friendName}</h3>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+                </div>
+                <div style="flex: 1; padding: 16px; overflow-y: auto;">
+                    <div style="background: #f0f2f5; padding: 8px 12px; border-radius: 18px; margin-bottom: 8px; max-width: 70%;">
+                        Hey! How are you doing?
+                    </div>
+                </div>
+                <div style="padding: 16px; border-top: 1px solid #dadde1;">
+                    <input type="text" placeholder="Type a message..." style="width: 100%; padding: 8px 12px; border: 1px solid #dadde1; border-radius: 20px; outline: none;">
+                </div>
+            `;
+            
+            document.body.appendChild(chatWindow);
+        }
+
+        function unfriend(friendName) {
+            // Create custom confirmation dialog
+            const confirmDialog = document.createElement('div');
+            confirmDialog.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            `;
+            
+            confirmDialog.innerHTML = `
+                <div style="background: white; padding: 24px; border-radius: 8px; max-width: 400px; text-align: center;">
+                    <h3 style="margin: 0 0 16px 0; color: #1c1e21;">Unfriend ${friendName}?</h3>
+                    <p style="color: #65676b; margin: 0 0 24px 0;">Are you sure you want to remove ${friendName} from your friends list?</p>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" 
+                                style="padding: 8px 16px; background: #e4e6ea; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            Cancel
+                        </button>
+                        <button onclick="confirmUnfriend('${friendName}', this)" 
+                                style="padding: 8px 16px; background: #e41e3f; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            Remove Friend
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmDialog);
+        }
+
+        function confirmUnfriend(friendName, button) {
+            const index = friends.findIndex(f => f.name === friendName);
+            if (index > -1) {
+                friends.splice(index, 1);
+                filteredFriends = [...friends];
+                renderFriends();
+                
+                // Show success notification
+                showNotification(`${friendName} has been removed from your friends list`, 'success');
+            }
+            
+            // Remove the confirmation dialog
+            button.closest('[style*="position: fixed"]').remove();
+        }
+
+        function showMore(friendName) {
+            // Create dropdown menu
+            const dropdown = document.createElement('div');
+            dropdown.style.cssText = `
+                position: fixed;
+                background: white;
+                border: 1px solid #dadde1;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                z-index: 1000;
+                min-width: 200px;
+            `;
+            
+            const options = [
+                { text: '👤 View Profile', action: () => viewProfile(friendName) },
+                { text: '📝 Edit Friend List', action: () => editFriendList(friendName) },
+                { text: '🚫 Block', action: () => blockUser(friendName) },
+                { text: '⚠️ Report', action: () => reportUser(friendName) }
+            ];
+            
+            dropdown.innerHTML = options.map(option => `
+                <div style="padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f0f2f5; transition: background 0.2s;"
+                     onmouseover="this.style.background='#f2f2f2'"
+                     onmouseout="this.style.background='white'"
+                     onclick="${option.action.name}('${friendName}'); this.parentElement.remove();">
+                    ${option.text}
+                </div>
+            `).join('');
+            
+            // Position dropdown near the button
+            const rect = event.target.getBoundingClientRect();
+            dropdown.style.top = (rect.bottom + 5) + 'px';
+            dropdown.style.left = (rect.right - 200) + 'px';
+            
+            document.body.appendChild(dropdown);
+            
+            // Close dropdown when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', function closeDropdown(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.remove();
+                        document.removeEventListener('click', closeDropdown);
+                    }
+                });
+            }, 100);
+        }
+
+        function viewProfile(friendName) {
+            showNotification(`Opening ${friendName}'s profile...`, 'info');
+            // Here you would typically navigate to the profile page
+        }
+
+        function editFriendList(friendName) {
+            showNotification(`Edit friend list options for ${friendName}`, 'info');
+        }
+
+        function blockUser(friendName) {
+            const confirmBlock = confirm(`Are you sure you want to block ${friendName}? They won't be able to see your profile or contact you.`);
+            if (confirmBlock) {
+                showNotification(`${friendName} has been blocked`, 'warning');
+            }
+        }
+
+        function reportUser(friendName) {
+            showNotification(`Report form opened for ${friendName}`, 'warning');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const colors = {
+                success: '#42b883',
+                warning: '#f56565',
+                info: '#1877f2'
+            };
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${colors[type]};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1001;
+                font-weight: 500;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize the friends list
+        renderFriends();
+    
+      
+
+  function setActiveTab(event) {
+    event.preventDefault();
+    const links = document.querySelectorAll('.tab-link');
+    links.forEach(link => link.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+ ////////////
+  const tabButtons = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-tab');
+
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.style.display = 'none');
+
+      button.classList.add('active');
+      const targetContent = document.querySelector(`.tab-content[data-content="${target}"]`);
+      if (targetContent) {
+        targetContent.style.display = 'block';
+      }
+    });
+  });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    const confirmButtons = document.querySelectorAll(".confirm-btn");
+    const cancelButtons = document.querySelectorAll(".cancel-btn");
+
+    confirmButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const input = button.previousElementSibling;
+        const link = input.value.trim();
+        if (link) {
+          alert(`✅ Profile linked: ${link}`);
+          input.disabled = true;
+          button.disabled = true;
+          button.textContent = "Confirmed";
+        } else {
+          alert("❗ Please paste a valid link.");
+        }
+      });
+    });
+
+    cancelButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const input = button.previousElementSibling.previousElementSibling;
+        input.value = "";
+      });
+    });
+</script>
+</div>
+</body>
+
+</html>
+
+  
+
+
