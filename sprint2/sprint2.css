@@ -384,7 +384,7 @@
         }
 
         .add-btn:hover {
-            background:#f8f9fa;
+            background:#eee;
             transform: translateY(-2px);
         }
 
@@ -1075,12 +1075,7 @@
             color: #555;
         }
 
-        .contact-info {
-           
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
+       
 
         .contact-info p {
             margin-bottom: 8px;

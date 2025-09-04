@@ -454,11 +454,12 @@
 
     <!-- Citizen Form -->
     <div id="citizenForm" class="form-section">
+       <a href="Hey there.html" class="back-link">
       <span>
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z" fill="#012316"/>
         </svg>
-      </span>
+      </span></a>
       <div class="tabs">
         <div class="active">Personal Information</div>
         <div>Phone Verification</div>
@@ -551,11 +552,12 @@
 
     <!-- Institution Form -->
     <div id="institutionForm" class="form-section">
+      <a href="Hey there.html" class="back-link">
       <span>
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z" fill="#012316"/>
         </svg>
-      </span>
+      </span></a>
       <div class="tabs">
         <div class="active">Institution Information</div>
         <div>Phone Verification</div>
@@ -660,18 +662,19 @@
             <small>Helper placeholder</small>
           </div>
         </div>
-        
-        <button type="submit" class="submit-btn">Continue</button>
+
+         <button type="submit" class="submit-btn">Continue</button>
       </form>
     </div>
 
     <!-- Employee Form -->
     <div id="employeeForm" class="form-section">
+      <a href="Hey there.html" class="back-link">
       <span>
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z" fill="#012316"/>
         </svg>
-      </span>
+      </span></a>
       <div class="tabs">
         <div class="active">Employee Information</div>
         <div>Phone Verification</div>
@@ -772,7 +775,11 @@
           </div>
         </div>
         
-        <button type="submit" class="submit-btn">Continue</button>
+        <button type="button"
+  id="continueBtn"
+  class="continue-button"
+  onclick="goNextPage()"
+  disabled>Continue</button>
       </form>
     </div>
   </div>
@@ -868,6 +875,11 @@
         updateFlag(inputId, flagId);
       }
     });
+
+     function goNextPage() {
+  // مثلاً هنا رابط الصفحة الثانية:
+  window.location.href = "password.html";
+}
   </script>
 </body>
 </html>

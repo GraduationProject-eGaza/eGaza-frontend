@@ -444,12 +444,12 @@
         
       
     
-      <div class="tab-content" id="tab 2">
+      <div class="tab-content" id="tab 2" style="padding:10px">
         
            <div class="content-header">
      <h3 class="section-title">Manage Services</h3>
                 <button class="add-btn" onclick="openAddModal()">
-                    <span>+</span>
+                    <span>+ Add New</span>
                     
                 </button>
             </div>
@@ -625,12 +625,108 @@
  </div>
 </div>
    
-      </div>
-      <div class="tab-content" id="tab 3">
-         <div class="content-header">
-        
     
+      <div class="tab-content" id="tab 3" style="padding:10px">
+       
+           
+
+    
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Filter Section -->
+               
+
+                <!-- Incoming Requests Table -->
+                <div class="requests-section">
+                    <div class="hrader"></div>
+                    <h2>Incoming Requests</h2>
+                    <div class="requests-filter">
+                        <select class="filter-dropdown">
+                            <option>All</option>
+                            <option>Pending</option>
+                            <option>Rejected</option>
+                            <option>Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="requests-table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Service ID</th>
+                                    <th>Service Type</th>
+                                    <th>Submitted By</th>
+                                    <th>Submitted At</th>
+                                    <th>Status</th>
+                                    <th>Assigned to</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>PMSD-001</td>
+                                    <td>Food Parcel Distribution</td>
+                                    <td>Mohammed Alshawa</td>
+                                    <td>21-April-2025</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>PMSD-002</td>
+                                    <td>Orphan Sponsorship Enrollment</td>
+                                    <td>Mohammed Alshawa</td>
+                                    <td>21-April-2025</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td><span class="assignee">👤 alshawamm</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>PMSD-003</td>
+                                    <td>Disability Support Services</td>
+                                    <td>Mohammed Alshawa</td>
+                                    <td>21-April-2025</td>
+                                    <td><span class="status rejected">Rejected</span></td>
+                                    <td><span class="assignee">👤 alshawamm</span></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>PMSD-004</td>
+                                    <td>Student Tuition Support</td>
+                                    <td>Mohammed Alshawa</td>
+                                    <td>21-April-2025</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td><span class="assignee">👤 alshawamm</span></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>PMSD-005</td>
+                                    <td>Support Services</td>
+                                    <td>Mohammed Alshawa</td>
+                                    <td>21-April-2025</td>
+                                    <td><span class="status rejected">Rejected</span></td>
+                                    <td><span class="assignee">👤 alshawamm</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+                
+            
+ 
         </div>
+        
       </div>
     </div>
 

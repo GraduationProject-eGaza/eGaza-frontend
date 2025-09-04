@@ -14,14 +14,14 @@
       },
       {
         id: "2",
-        name: "Aya Almassri",
+        name: "Akram Almassri",
         message: "See you later.",
         date: "Sep 11",
-        avatar: "photo.png",
+        avatar: "prof.png",
         chat: [
-          { from: "Aya", text: "Are we still on for the meeting?" },
+          { from: "Akram", text: "Are we still on for the meeting?" },
           { from: "user", text: "Yes, at 4 PM." },
-          { from: "Aya", text: "Perfect!" }
+          { from: "Akram", text: "Perfect!" }
         ]
       },
       {

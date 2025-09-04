@@ -525,3 +525,219 @@
         document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
       }
     });
+
+    // DOM Content Loaded Event
+document.addEventListener('DOMContentLoaded', function() {
+    initializeNavigation();
+    initializeFiltering();
+    initializeSearch();
+});
+
+// Navigation Tab Functionality
+function initializeNavigation() {
+    const navTabs = document.querySelectorAll('.nav-tab');
+    
+    navTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            navTabs.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Here you could add logic to show/hide different content sections
+            // For now, we'll just update the tab appearance
+            console.log('Switched to tab:', this.textContent);
+        });
+    });
+}
+
+// Table Filtering Functionality
+function initializeFiltering() {
+    const filterDropdown = document.querySelector('.filter-dropdown');
+    const filterLabels = document.querySelectorAll('.filter-group label');
+    const tableRows = document.querySelectorAll('.requests-table tbody tr');
+    
+    // Dropdown filter
+    if (filterDropdown) {
+        filterDropdown.addEventListener('change', function() {
+            const selectedFilter = this.value.toLowerCase();
+            filterTable(selectedFilter, tableRows);
+        });
+    }
+    
+    // Filter labels
+    filterLabels.forEach(label => {
+        label.addEventListener('click', function() {
+            // Remove active state from all labels
+            filterLabels.forEach(l => l.style.backgroundColor = '');
+            
+            // Add active state to clicked label
+            this.style.backgroundColor = '#e3f2fd';
+            
+            const filterText = this.textContent.toLowerCase();
+            let filterValue = 'all';
+            
+            if (filterText.includes('pending')) {
+                filterValue = 'pending';
+            } else if (filterText.includes('rejected')) {
+                filterValue = 'rejected';
+            } else if (filterText.includes('completed')) {
+                filterValue = 'completed';
+            }
+            
+            filterTable(filterValue, tableRows);
+        });
+    });
+}
+
+// Filter table rows based on status
+function filterTable(filterValue, rows) {
+    rows.forEach(row => {
+        const statusCell = row.querySelector('.status');
+        
+        if (!statusCell) {
+            row.style.display = '';
+            return;
+        }
+        
+        const status = statusCell.textContent.toLowerCase();
+        
+        if (filterValue === 'all' || status.includes(filterValue)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Update visible row count
+    updateRowNumbers();
+}
+
+// Update row numbers after filtering
+function updateRowNumbers() {
+    const visibleRows = document.querySelectorAll('.requests-table tbody tr[style=""], .requests-table tbody tr:not([style])');
+    visibleRows.forEach((row, index) => {
+        const numberCell = row.querySelector('td:first-child');
+        if (numberCell) {
+            numberCell.textContent = index + 1;
+        }
+    });
+}
+
+// Search functionality
+function initializeSearch() {
+    const searchInput = document.querySelector('.search-bar input');
+    const tableRows = document.querySelectorAll('.requests-table tbody tr');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            tableRows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                
+                if (rowText.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            updateRowNumbers();
+        });
+    }
+}
+
+// Additional interactive features
+function initializeAdditionalFeatures() {
+    // Profile edit button
+    const editProfileBtn = document.querySelector('.edit-profile-btn');
+    if (editProfileBtn) {
+        editProfileBtn.addEventListener('click', function() {
+            alert('Edit Profile functionality would be implemented here');
+        });
+    }
+    
+    // Share button
+    const shareBtn = document.querySelector('.share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Government Dashboard',
+                    text: 'Palestinian Ministry of Social Development Dashboard',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Dashboard URL copied to clipboard!');
+                }).catch(() => {
+                    alert('Share functionality: ' + url);
+                });
+            }
+        });
+    }
+    
+    // Table row hover effects and interactions
+    const tableRows = document.querySelectorAll('.requests-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('click', function() {
+            // Remove selection from other rows
+            tableRows.forEach(r => r.classList.remove('selected'));
+            
+            // Add selection to clicked row
+            this.classList.add('selected');
+            
+            // You could add more functionality here, like showing details
+            console.log('Selected request:', this.querySelector('td:nth-child(2)').textContent);
+        });
+    });
+}
+
+// Initialize additional features when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeAdditionalFeatures);
+
+// Utility function to format dates
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    };
+    return date.toLocaleDateString('en-US', options);
+}
+
+// Utility function to get status color
+function getStatusColor(status) {
+    switch(status.toLowerCase()) {
+        case 'pending':
+            return '#856404';
+        case 'rejected':
+            return '#721c24';
+        case 'completed':
+            return '#155724';
+        default:
+            return '#666';
+    }
+}
+
+// Add some CSS for selected row via JavaScript
+const style = document.createElement('style');
+style.textContent = `
+    .requests-table tbody tr.selected {
+        background-color: #e3f2fd !important;
+        border-left: 4px solid #007bff;
+    }
+    
+    .filter-group label.active {
+        background-color: #e3f2fd;
+        color: #007bff;
+        font-weight: 600;
+    }
+`;
+document.head.appendChild(style);
+
