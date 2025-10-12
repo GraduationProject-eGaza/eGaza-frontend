@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hey there, What brings you here today?</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f8fa;
+
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* Main container for all forms */
+      .main-container {
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        padding: 40px;
+        min-height: 350px;
+      }
+
+      /* Selection screen styles */
+      .selection-screen h2 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .selection-screen p {
+        color: #666;
+        font-size: xx-small;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .options {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        gap: 16px;
+      }
+
+      .option {
+        flex: 1;
+        padding: 20px 10px;
+        border: 2px solid #ddd;
+        border-radius: 16px;
+        background-color: #fff;
+        position: relative;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .option:hover {
+        border-color: #e7e7f6;
+      }
+
+      .option.selected {
+        border-color: #e7e7f6;
+        background-color: #e7e7f6;
+      }
+
+      .radio-indicator {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #aaa;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        top: 10px;
+        left: 10%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+      }
+
+      .radio-indicator::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        background-color: #41508c;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .option.selected .radio-indicator {
+        border-color: #002d62;
+      }
+
+      .option.selected .radio-indicator::after {
+        opacity: 1;
+      }
+
+      .icon-wrapper {
+        width: 50px;
+        height: 50px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 35px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .option.selected .icon-wrapper {
+        background-color: #d0e7ff;
+      }
+
+      .icon-wrapper i,
+      .icon-wrapper svg {
+        font-size: 28px;
+        color: #0e0e0e;
+        width: 30px;
+        height: 30px;
+      }
+
+      .continue-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      /* Form styles - unified for all forms */
+      .form-section {
+        display: none;
+      }
+
+      .form-section.active {
+        display: block;
+      }
+
+      .tabs {
+        gap: 20px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        font-size: small;
+        color: #333;
+      }
+
+      .tabs div {
+        flex: 1;
+        text-align: center;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 8px;
+      }
+
+      .tabs .active {
+        border-color: #002855;
+        font-weight: bold;
+      }
+
+      .form-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .form-description {
+        text-align: center;
+        font-size: xx-small;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .form-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .form-group {
+        text-align: left;
+        flex: 1 1 calc(50% - 20px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group.full-width {
+        flex: 1 1 100%;
+      }
+
+      .form-group label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        font-size: small;
+      }
+
+      .form-group input,
+      .form-group select {
+        padding: 10px;
+        font-size: xx-small;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        height: 35px;
+        width: 100%;
+      }
+
+      .form-group small {
+        font-size: xx-small;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      /* Input with icon styles */
+      .input-wrapper {
+        position: relative;
+        width: 100%;
+      }
+
+      .input-wrapper input {
+        width: 100%;
+        height: 40px;
+        padding-right: 35px;
+        box-sizing: border-box;
+      }
+
+      .input-wrapper .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: gray;
+        cursor: pointer;
+      }
+
+      .input-icon {
+        position: relative;
+        width: 100%;
+      }
+
+      .input-icon i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: gray;
+      }
+
+      .input-icon input {
+        padding-left: 35px;
+        height: 35px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Phone input styles */
+      .phone-input {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 6px 10px;
+        width: 100%;
+        height: 35px;
+        background-color: #ffffff;
+      }
+
+      .phone-input input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        flex: 1;
+        padding: 6px;
+        background: none;
+      }
+
+      .phone-input img.flag {
+        width: 25px;
+        height: 15px;
+        margin-right: 8px;
+        object-fit: cover;
+        display: none;
+      }
+
+      .submit-btn {
+        margin-left: 78%;
+        margin-top: 20px;
+        background-color: #002d62;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        min-width: 120px;
+      }
+
+      .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      /* Hide number input spinners */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .main-container {
+          padding: 20px;
+        }
+
+        .form-group {
+          flex: 1 1 100%;
+        }
+
+        .options {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .continue-btn {
+          width: 100%;
+        }
+      }
+      .option-text {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+
+        text-align: center;
+      }
+      .continue-btn {
+        margin-left: 145px;
+        width: 45%;
+        min-height: 35px;
+        height: 35px;
+        background: #002d62;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        /* margin-top: 12px; */
+        box-sizing: border-box;
+        line-height: 1.4;
+      }
+      .option.selected {
+        border-color: #002d62;
+        background-color: #aaaaaa08;
+      }
+      .logo-half-out {
+        width: 100px;
+        height: auto;
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .signin-container {
+        position: relative;
+        /* بقية الخصائص كما كانت */
+      }
+      .form-label {
+        position: relative;
+        display: block; /* Ensure label takes full width */
+        padding-right: 20px; /* Space for asterisk */
+      }
+      .req,
+      .reqID,
+      .reqUsername {
+        color: red;
+        position: absolute;
+        right: 0; /* Align asterisk to the right */
+        top: 50%;
+        transform: translateY(-50%); /* Vertically center asterisk */
+        display: inline;
+      }
+      .input-form:focus {
+        outline: none;
+        border-color: #002d62;
+        box-shadow: 0 0 5px #004a99;
+      }
+      .phone-input input:focus {
+        outline: none;
+        border-color: white;
+      }
+      .signin-container {
+        position: relative;
+        margin: 50px 390px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 60px;
+        background-color: #f5f4f4;
+      }
+      .signin-title {
+        font-size: 28px;
+        font-weight: bolder;
+        color: #333;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+      .main-container {
+        position: relative;
+        margin: 15px 390px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="icon">
+        <img
+          src="logo pals.png"
+          alt="logo"
+          height="80"
+          style="margin-bottom: 16px"
+        />
+        <img src="logo gaza.png" alt="Logo" height="100" />
+      </div>
+      <div>
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22.7153 0H9.30063C3.47373 0 0 3.472 0 9.296V22.688C0 28.528 3.47373 32 9.30063 32H22.6993C28.5262 32 31.9999 28.528 31.9999 22.704V9.296C32.016 3.472 28.5422 0 22.7153 0ZM21.3867 19.68C21.8509 20.144 21.8509 20.912 21.3867 21.376C21.1465 21.616 20.8424 21.728 20.5382 21.728C20.2341 21.728 19.9299 21.616 19.6898 21.376L16.008 17.696L12.3261 21.376C12.086 21.616 11.7819 21.728 11.4777 21.728C11.1736 21.728 10.8694 21.616 10.6293 21.376C10.1651 20.912 10.1651 20.144 10.6293 19.68L14.3111 16L10.6293 12.32C10.1651 11.856 10.1651 11.088 10.6293 10.624C11.0935 10.16 11.8619 10.16 12.3261 10.624L16.008 14.304L19.6898 10.624C20.154 10.16 20.9224 10.16 21.3867 10.624C21.8509 11.088 21.8509 11.856 21.3867 12.32L17.7048 16L21.3867 19.68Z"
+            fill="#023611"
+          />
+        </svg>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <!-- Selection Screen -->
+      <div id="selectionScreen" class="selection-screen">
+        <h2>Hey there, What brings you here today?</h2>
+        <p>
+          Please choose the option that best describes you to proceed with the
+          sign-up process.
+        </p>
+
+        <div class="options">
+          <div class="option" data-value="citizen">
+            <div class="radio-indicator"></div>
+            <div class="icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z"
+                />
+              </svg>
+            </div>
+            <span class="option-text">Citizen</span>
+          </div>
+          <div class="option" data-value="institution">
+            <div class="radio-indicator"></div>
+            <div class="icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.5 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5h-.75V3.75a.75.75 0 0 0 0-1.5h-15ZM9 6a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm-.75 3.75A.75.75 0 0 1 9 9h1.5a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM9 12a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm3.75-5.25A.75.75 0 0 1 13.5 6H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM13.5 9a.75.75 0 0 0 0 1.5H15A.75.75 0 0 0 15 9h-1.5Zm-.75 3.75a.75.75 0 0 1 .75-.75H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM9 19.5v-2.25a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 9 19.5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <span class="option-text">Government Institution</span>
+          </div>
+          <div class="option" data-value="employee">
+            <div class="radio-indicator"></div>
+            <div class="icon-wrapper">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <span class="option-text">Government Employee</span>
+          </div>
+        </div>
+
+        <button onclick="showForm()" class="continue-btn" disabled>
+          Continue
+        </button>
+      </div>
+
+      <!-- Citizen Form -->
+      <div id="citizenForm" class="form-section">
+        <a href="Hey there.html" class="back-link">
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z"
+                fill="#012316"
+              />
+            </svg> </span
+        ></a>
+        <div class="tabs">
+          <div class="active">Personal Information</div>
+          <div>Phone Verification</div>
+        </div>
+        <h2 class="form-title">Sign up as Citizen</h2>
+        <p class="form-description">
+          Please enter the information below to continue the registration
+          process
+        </p>
+        <form  id="signupForm">
+          <div class="form-content">
+            <div class="form-group">
+              <label for="nationalID" class="form-label required"
+                >National ID <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="number"
+                inputmode="numeric"
+                pattern="\d*"
+                placeholder="content"
+                required
+              />
+              <small>9 digits only</small>
+            </div>
+            <div class="form-group">
+              <label for="username" class="form-label"
+                >Username <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+            <div class="form-group full-width">
+              <label for="fullName" class="form-label required"
+                >Full Name<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="government" class="form-label required"
+                >Government <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="city" class="form-label required"
+                >City<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="street" class="form-label required"
+                >Street<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+            <div class="form-group">
+              <label for="landmark" class="form-label required"
+                >Nearest Landmark<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label required"
+                >Email Address<span class="req">*</span></label
+              >
+              <div class="input-icon">
+                <i class="fas fa-envelope"></i>
+                <input
+                  class="input-form"
+                  type="email"
+                  id="email"
+                  placeholder="content"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneInput" class="form-label required"
+                >Phone Number<span class="req">*</span></label
+              >
+              <div class="phone-input">
+                <img id="flagImage" class="flag" alt="Flag" />
+                <input
+                  class="input-form"
+                  type="tel"
+                  id="phoneInput"
+                  value="+970"
+                  placeholder="+970 XXX XXX XXX"
+                  required
+                />
+              </div>
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="form-label required"
+                >Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="password"
+                  placeholder="Create password"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('password')"
+                ></i>
+              </div>
+              <small>At least 8 characters</small>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password" class="form-label required"
+                >Confirm Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Confirm password"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('confirm-password')"
+                ></i>
+              </div>
+              <small>Must match your password</small>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            style="margin-left: 390px; width: 25%"
+          >
+            Continue
+          </button>
+        </form>
+      </div>
+
+      <!-- Institution Form -->
+      <div id="institutionForm" class="form-section">
+        <a href="Hey there.html" class="back-link">
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z"
+                fill="#012316"
+              />
+            </svg> </span
+        ></a>
+        <div class="tabs">
+          <div class="active">Institution Information</div>
+          <div>Phone Verification</div>
+        </div>
+        <h2 class="form-title">Sign up as Government Institution</h2>
+        <p class="form-description">
+          Please enter the information below to continue the registration
+          process
+        </p>
+        <form  id="signupForm">
+          <div class="form-content">
+            <div class="form-group">
+              <label for="institutionName" class="form-label required"
+                >Institution Name<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="institutionName"
+                placeholder="content required"
+              />
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="institutionType" class="form-label required"
+                >Institution Type<span class="req">*</span></label
+              >
+              <select class="input-form" id="institutionType" required>
+                <option value="">Select type</option>
+                <option value="ministry">Ministry</option>
+                <option value="agency">Government Agency</option>
+                <option value="municipality">Municipality</option>
+                <option value="department">Department</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="institutionEmail" class="form-label required"
+                >Institution Email Address<span class="req">*</span></label
+              >
+              <div class="input-icon">
+                <i class="fas fa-envelope"></i>
+                <input
+                  class="input-form"
+                  type="email"
+                  id="institutionEmail"
+                  placeholder="Enter official email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="officePhone" class="form-label required"
+                >Office Phone Number<span class="req">*</span></label
+              >
+              <div class="phone-input">
+                <img id="flagImage2" class="flag" alt="Flag" />
+                <input
+                  class="input-form"
+                  type="tel"
+                  id="phoneInput2"
+                  value="+970"
+                  placeholder="+970 XXX XXX XXX"
+                  required
+                />
+              </div>
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="governmentId" class="form-label required"
+                >Government ID<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="governmentId"
+                placeholder="content"
+              />
+              <small>Helper placeholder</small>
+            </div>
+            <div class="form-group">
+              <label for="government" class="form-label required"
+                >Government <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="government"
+                placeholder="content"
+              />
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="city" class="form-label required"
+                >City<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="city"
+                placeholder="content"
+              />
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="Street" class="form-label required"
+                >Street<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="street"
+                placeholder="content"
+              />
+              <small>Helper placeholder</small>
+            </div>
+            <div class="form-group full-width">
+              <label for="institutionAddress" class="form-label required"
+                >Representative National ID <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                id="institutionAddress"
+                placeholder="content"
+                required
+              />
+              <small> Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="representativeId" class="form-label required"
+                >Representative Email Address<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="number"
+                id="representativeId"
+                placeholder="content"
+                required
+              />
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="representativeMobile" class="form-label required"
+                >Representative Mobile Number<span class="req">*</span></label
+              >
+              <div class="phone-input">
+                <img id="flagImage3" class="flag" alt="Flag" />
+                <input
+                  class="input-form"
+                  type="tel"
+                  id="representativeMobile"
+                  value="+970"
+                  placeholder="+970 XXX XXX XXX"
+                  required
+                />
+              </div>
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="inst-password" class="form-label required"
+                >Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="inst-password"
+                  placeholder="content"
+                  equired
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('inst-password')"
+                ></i>
+              </div>
+              <small>Helper placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="nationalID" class="form-label required"
+                >Confirm Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="inst-confirm-password"
+                  placeholder="content"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('inst-confirm-password')"
+                ></i>
+              </div>
+              <small>Helper placeholder</small>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            style="margin-left: 390px; width: 25%"
+          >
+            Continue
+          </button>
+        </form>
+      </div>
+
+      <!-- Employee Form -->
+      <div id="employeeForm" class="form-section">
+        <a href="Hey there.html" class="back-link">
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.0003 2.66663C8.65366 2.66663 2.66699 8.65329 2.66699 16C2.66699 23.3466 8.65366 29.3333 16.0003 29.3333C23.347 29.3333 29.3337 23.3466 29.3337 16C29.3337 8.65329 23.347 2.66663 16.0003 2.66663ZM18.387 20C18.7737 20.3866 18.7737 21.0266 18.387 21.4133C18.187 21.6133 17.9337 21.7066 17.6803 21.7066C17.427 21.7066 17.1737 21.6133 16.9737 21.4133L12.267 16.7066C11.8803 16.32 11.8803 15.68 12.267 15.2933L16.9737 10.5866C17.3603 10.2 18.0003 10.2 18.387 10.5866C18.7737 10.9733 18.7737 11.6133 18.387 12L14.387 16L18.387 20Z"
+                fill="#012316"
+              />
+            </svg> </span
+        ></a>
+        <div class="tabs">
+          <div class="active">Employee Information</div>
+          <div>Phone Verification</div>
+        </div>
+        <h2 class="form-title">Sign up as Government Employee</h2>
+        <p class="form-description">
+          Please enter the information below to continue the registration
+          process
+        </p>
+        <form  id="signupForm">
+          <div class="form-content">
+            <div class="form-group">
+              <label for="nationalID" class="form-label required"
+                >National ID <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="number"
+                inputmode="numeric"
+                pattern="\d*"
+                placeholder="content"
+                required
+              />
+              <small>9 digits only</small>
+            </div>
+            <div class="form-group">
+              <label for="username" class="form-label"
+                >Username <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+            <div class="form-group full-width">
+              <label for="fullName" class="form-label required"
+                >Full Name<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="government" class="form-label required"
+                >Government <span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="city" class="form-label required"
+                >City<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="street" class="form-label required"
+                >Street<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+            <div class="form-group">
+              <label for="landmark" class="form-label required"
+                >Nearest Landmark<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="text"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="employeeID" class="form-label required">
+                Employee ID<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="id"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="governmentId" class="form-label required"
+                >Government ID<span class="req">*</span></label
+              >
+              <input
+                class="input-form"
+                type="id"
+                placeholder="content"
+                required
+              />
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label required"
+                >Email Address<span class="req">*</span></label
+              >
+              <div class="input-icon">
+                <i class="fas fa-envelope"></i>
+                <input
+                  class="input-form"
+                  type="email"
+                  id="email"
+                  placeholder="content"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneInput" class="form-label required"
+                >Phone Number<span class="req">*</span></label
+              >
+              <div class="phone-input">
+                <img id="flagImage" class="flag" alt="Flag" />
+                <input
+                  class="input-form"
+                  type="tel"
+                  id="phoneInput"
+                  value="+970"
+                  placeholder="+970 XXX XXX XXX"
+                  required
+                />
+              </div>
+              <small>Help placeholder</small>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="form-label required"
+                >Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="password"
+                  placeholder="Create password"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('password')"
+                ></i>
+              </div>
+              <small>At least 8 characters</small>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password" class="form-label required"
+                >Confirm Password<span class="req">*</span></label
+              >
+              <div class="input-wrapper">
+                <input
+                  class="input-form"
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Confirm password"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  onclick="togglePassword('confirm-password')"
+                ></i>
+              </div>
+              <small>Must match your password</small>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            style="margin-left: 390px; width: 25%"
+          >
+            Continue
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+    
+     
+      
+
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const icon = input.nextElementSibling;
+
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+
+      // Flag functionality
+      const flagMap = {
+        "+970": "https://flagcdn.com/w40/ps.png",
+        "+972": "https://flagcdn.com/w40/il.png",
+        "+20": "https://flagcdn.com/w40/eg.png",
+        "+966": "https://flagcdn.com/w40/sa.png",
+        "+971": "https://flagcdn.com/w40/ae.png",
+        "+974": "https://flagcdn.com/w40/qa.png",
+        "+212": "https://flagcdn.com/w40/ma.png",
+        "+1": "https://flagcdn.com/w40/us.png",
+        "+44": "https://flagcdn.com/w40/gb.png",
+        "+91": "https://flagcdn.com/w40/in.png",
+      };
+
+      function updateFlag(phoneInputId, flagImageId) {
+        const phoneInput = document.getElementById(phoneInputId);
+        const flagImage = document.getElementById(flagImageId);
+        const val = phoneInput.value.trim();
+        const codeKeys = Object.keys(flagMap).sort(
+          (a, b) => b.length - a.length
+        );
+
+        let foundFlag = "";
+        for (let code of codeKeys) {
+          if (val.startsWith(code)) {
+            foundFlag = flagMap[code];
+            break;
+          }
+        }
+
+        if (foundFlag) {
+          flagImage.src = foundFlag;
+          flagImage.style.display = "block";
+        } else {
+          flagImage.style.display = "none";
+        }
+      }
+
+      // Initialize phone inputs
+      ["phoneInput", "phoneInput2", "phoneInput3", "phoneInput4"].forEach(
+        (inputId, index) => {
+          const input = document.getElementById(inputId);
+          const flagId = "flagImage" + (index === 0 ? "" : index + 1);
+
+          if (input) {
+            input.addEventListener("input", () => updateFlag(inputId, flagId));
+            updateFlag(inputId, flagId);
+          }
+        }
+      );
+
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+        
+
+         // الانتقال لصفحة التحقق
+      
+
+
+        //////////////////زر النتقال موجود ب فو
+       
+
+  // نضيف حدث عند النقر على الزر
+ 
+  // 1️⃣ اختيار نوع المستخدم وتفعيل زر Continue
+const options = document.querySelectorAll(".option");
+const continueBtn = document.querySelector(".continue-btn");
+let selectedUserType = null;
+
+options.forEach(option => {
+  option.addEventListener("click", () => {
+    selectedUserType = option.getAttribute("data-value");
+    options.forEach(o => o.classList.remove("selected"));
+    option.classList.add("selected");
+    continueBtn.disabled = false;
+  });
+});
+
+// 2️⃣ عند الضغط على Continue تظهر الفورم المناسبة
+function showForm() {
+  if (!selectedUserType) return;
+
+  // اخفاء شاشة الاختيار
+  document.getElementById("selectionScreen").style.display = "none";
+
+  // اظهار الفورم المناسب حسب الخيار
+  if (selectedUserType === "citizen") {
+    document.getElementById("citizenForm").classList.add("active");
+  } else if (selectedUserType === "institution") {
+    document.getElementById("institutionForm").classList.add("active");
+  } else if (selectedUserType === "employee") {
+    document.getElementById("employeeForm").classList.add("active");
+  }
+}
+
+// 3️⃣ عند الضغط على زر Submit داخل الفورم لإرسال البيانات
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // جمع البيانات من الفورم (كما عندك)
+  let type = selectedUserType; // نوع المستخدم من الاختيار
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let password_confirmation = document.getElementById("password_confirmation").value;
+  let full_name = document.getElementById("full_name").value;
+  let national_id = document.getElementById("national_id").value;
+  let username = document.getElementById("username").value;
+  let phone = document.getElementById("phone").value;
+  let employee_id = document.getElementById("employee_id").value;
+  let government_id = document.getElementById("government_id").value;
+  let governorate = document.getElementById("governorate").value;
+  let city = document.getElementById("city").value;
+  let street = document.getElementById("street").value;
+  let nearest_landmark = document.getElementById("nearest_landmark").value;
+
+  if (password !== password_confirmation) {
+    alert("كلمات المرور غير متطابقة ❌");
+    return;
+  }
+
+  fetch("http://localhost:8000/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({ type, email, password, password_confirmation, full_name, national_id, username, phone, employee_id, government_id, governorate, city, street, nearest_landmark }),
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert("تم إرسال رمز التحقق إلى بريدك الإلكتروني ✉️");
+
+        // تخزين مؤقت
+        localStorage.setItem("signupEmail", email);
+        localStorage.setItem("signupType", type);
+
+        // الانتقال مباشرة لصفحة Verify
+        window.location.href = "Verify.html";
+      } else {
+        alert("خطأ أثناء التسجيل ❌\n" + (data.message || ""));
+      }
+    })
+    .catch(err => console.error("Error:", err));
+});
+
+      
+    </script>
+    <script>
+  // 1️⃣ اختيار نوع المستخدم وتفعيل زر Continue
+  const options = document.querySelectorAll(".option");
+  const continueBtn = document.querySelector(".continue-btn");
+  let selectedUserType = null;
+
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      selectedUserType = option.getAttribute("data-value");
+
+      // إزالة التحديد من الخيارات الأخرى
+      options.forEach(o => o.classList.remove("selected"));
+      option.classList.add("selected");
+
+      // تفعيل زر Continue
+      continueBtn.disabled = false;
+    });
+  });
+
+  // 2️⃣ عند الضغط على Continue تظهر الفورم المناسبة
+  continueBtn.addEventListener("click", () => {
+    if (!selectedUserType) return;
+
+    // اخفاء شاشة الاختيار
+    document.getElementById("selectionScreen").style.display = "none";
+
+    // اظهار الفورم المناسب حسب الخيار
+    if (selectedUserType === "citizen") {
+      document.getElementById("citizenForm").classList.add("active");
+    } else if (selectedUserType === "institution") {
+      document.getElementById("institutionForm").classList.add("active");
+    } else if (selectedUserType === "employee") {
+      document.getElementById("employeeForm").classList.add("active");
+    }
+  });
+
+  // 3️⃣ إرسال الفورم والانتقال لصفحة Verify
+  document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let type = selectedUserType; // نوع المستخدم
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+let password_confirmation = document.getElementById("confirm-password").value;    let full_name = document.getElementById("full_name").value;
+    let national_id = document.getElementById("national_id").value;
+    let username = document.getElementById("username").value;
+    let phone = document.getElementById("phone").value;
+    let employee_id = document.getElementById("employee_id").value;
+    let government_id = document.getElementById("government_id").value;
+    let governorate = document.getElementById("governorate").value;
+    let city = document.getElementById("city").value;
+    let street = document.getElementById("street").value;
+    let nearest_landmark = document.getElementById("nearest_landmark").value;
+
+    if (password !== password_confirmation) {
+      alert("كلمات المرور غير متطابقة ❌");
+      return;
+    }
+
+    fetch("http://localhost:8000/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ type, email, password, password_confirmation, full_name, national_id, username, phone, employee_id, government_id, governorate, city, street, nearest_landmark }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert("تم إرسال رمز التحقق إلى بريدك الإلكتروني ✉️");
+
+          localStorage.setItem("signupEmail", email);
+          localStorage.setItem("signupType", type);
+
+          // الانتقال مباشرة لصفحة Verify
+          window.location.href = "Verify.html";
+        } else {
+          alert("خطأ أثناء التسجيل ❌\n" + (data.message || ""));
+        }
+      })
+      .catch(err => console.error("Error:", err));
+  });
+</script>
+
+  </body>
+</html>
